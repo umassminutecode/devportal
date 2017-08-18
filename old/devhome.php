@@ -30,7 +30,12 @@
                 </div>
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="nav navbar-nav">
-                        <li class="active" role="presentation"><a href="#">Projects </a></li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Projects <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li role="presentation"><a href="#">View Projects</a></li>
+                                <li role="presentation"><a href="#">Add New</a></li>
+                            </ul>
+                        </li>
                         <li role="presentation"><a href="#">The Team</a></li>
                         <li role="presentation"><a href="#">Requests (XX)</a></li>
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Administration <span class="caret"></span></a>
