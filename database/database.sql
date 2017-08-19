@@ -35,6 +35,7 @@ CREATE TABLE `minuteco_devportal`.`privilege_keys` (
     `id` INT NOT NULL AUTO_INCREMENT , 
     `cat` VARCHAR(64) NOT NULL , 
     `key_char` VARCHAR(64) NOT NULL , 
+    `key_type` ENUM('TF','UID','GID') NOT NULL ,
     `usage_ref` VARCHAR(256) NOT NULL , 
     `values_ref` VARCHAR(256) NOT NULL COMMENT '0 - Global override, uid - specific user (7 digit), gid - specific group (5 digit)' , 
     PRIMARY KEY (`id`)
