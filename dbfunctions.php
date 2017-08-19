@@ -13,8 +13,25 @@ function next_result($result){
 }
 
 function has_privilege($uid, $cat, $key, $target){
+    $check = check_key($uid, $cat, $key, $target);
 
-    $query = "SELECT user_privileges.uid, privilege_keys.cat, privilege_keys.key_char, user_privileges.key_value, privilege_keys.key_type
+    echo $check;
+    if($check = 0) return false;
+
+    //FIXME: Make the last used actually update
+
+    $query = "UPDATE user_privileges
+    SET last_used = 'CURRENT_TIMESTAMP'
+    WHERE id = '$check'";
+
+    $query = query_db($query);
+
+    return True;
+}
+
+function check_key($uid, $cat, $key, $target){
+
+    $query = "SELECT user_privileges.uid, privilege_keys.cat, privilege_keys.key_char, user_privileges.key_value, privilege_keys.key_type, user_privileges.id
               FROM user_privileges
               INNER JOIN privilege_keys ON user_privileges.key_id = privilege_keys.id
               WHERE user_privileges.uid = '$uid'";
@@ -49,16 +66,16 @@ function has_privilege($uid, $cat, $key, $target){
             // }
 
             if($result['key_type'] == 'TF'){
-                if ($result['key_value'] == $target) return true; 
+                if ($result['key_value'] == $target) return $result['id']; 
             }
             else{
-                if ($result['key_value'] == 0) return true;
-                if ($result['key_value'] == $target) return true; 
+                if ($result['key_value'] == 0) return $result['id'];
+                if ($result['key_value'] == $target) return $result['id']; 
             }
         }
     }
 
-    return "False";
+    return 0;
 }
 
 function format_key($cat, $key){
