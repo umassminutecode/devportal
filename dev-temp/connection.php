@@ -1,6 +1,5 @@
 <?php
 
-	
 	//Database Information
 	$servername = "localhost";
 	$servusername = "minuteco_webdev";

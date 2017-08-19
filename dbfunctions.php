@@ -18,8 +18,12 @@ function has_privilege($uid, $cat, $key, $target, $mode){
 
     $result = next_result(query_db($query));
 
+    //TODO: Add code for % wildcard
+
     if($cat != $result['cat'] || $key != $result['key_char'])
         return false;
+
+    //TODO: Add code for 0 global ovveride
 
     switch ($mode) {
         case $MODE_EQUALS:
