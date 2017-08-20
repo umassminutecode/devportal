@@ -9,9 +9,6 @@ CREATE TABLE `minuteco_devportal`.`users` (
     `creation_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , 
     `password` VARCHAR(128) NOT NULL , 
     `password_last_change` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , 
-    `deleted` BOOLEAN NOT NULL DEFAULT FALSE , 
-    `locked` BOOLEAN NOT NULL DEFAULT FALSE , 
-    `change_password` BOOLEAN NOT NULL DEFAULT FALSE , 
     PRIMARY KEY (`id`)
 ) ENGINE = MyISAM;
 
