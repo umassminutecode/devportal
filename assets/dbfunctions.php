@@ -61,10 +61,6 @@ function check_key($uid, $cat, $key, $target){
 
         if((($cat == $result['cat'] || $result['cat'] == "%") && ($key == $result['key_char'] || $result['key_char'] == "%")) && $result['key_value'] != NULL ){
 
-            // if($result['cat'] == "%" || $result['key_char'] == "%"){
-            //     return true;
-            // }
-
             if($result['key_type'] == 'TF'){
                 if ($result['key_value'] == $target) return $result['id']; 
             }
@@ -164,6 +160,16 @@ function show_page($key, $target){
         else{
             return;
         }
+}
+
+function get_user_info($uid, $field){
+    $sql = "SELECT $field
+            FROM user_info
+            WHERE user_info.uid = $uid";
+
+    $query = query_db($sql);
+    $result = next_result($query);
+    return $result["$field"];
 }
 
 

@@ -30,26 +30,17 @@
         <div class="col-md-12">
             <div class="table-responsive">
                 <?php
-                
-                db_table_to_html_table("users");
+
+                $sql = "SELECT users.uid AS 'User ID', users.username AS 'Username', CONCAT(user_info.fname, ' ', user_info.lname) AS 'Name', user_info.type as 'Type', user_info.uemail as 'UMASS Email'
+                FROM users
+                INNER JOIN user_info ON users.uid = user_info.uid";
+
+                db_select_to_html_table("users", $sql);
 
                 ?>
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="table-responsive">
-                <?php
-                
-                db_table_to_html_table("user_info", "id, uid AS 'User ID', fname AS 'First Name', lname as 'Last Name', uemail as 'UMASS Email', type as 'Type'");
-
-                ?>
-            </div>
-        </div>
-    </div>
-
 
 </div>
 

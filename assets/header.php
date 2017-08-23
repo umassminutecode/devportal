@@ -95,7 +95,7 @@ if($PAGE_KEY != "")
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">$SELF_RANK $SELF_NAME</a>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#"><?php echo get_user_info($GLOBAL_UID, "rank").", ".get_user_info($GLOBAL_UID, "fname")." ".get_user_info($GLOBAL_UID, "lname"); ?></a>
                         <ul class="dropdown-menu" role="menu">
                             <li role="presentation"><a href="#">My Profile</a></li>
                             <li role="presentation"><a href="#">Logout </a></li>
