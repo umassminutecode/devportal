@@ -9,7 +9,7 @@
     # THE ASSETS REFRENCE    #
     ##########################
 
-    $ASSETS_FOLDER = "../assets/";
+    $ASSETS_FOLDER = "assets/";
     $PAGE_KEY = "";
     $PAGE_TARGET = "";
 

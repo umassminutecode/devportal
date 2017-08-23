@@ -38,3 +38,24 @@ CREATE TABLE `minuteco_devportal`.`privilege_keys` (
     PRIMARY KEY (`id`)
 ) ENGINE = MyISAM;
 
+## USER_INFO TABLE
+
+CREATE TABLE `minuteco_devportal`.`user_info` ( 
+    `id` INT NOT NULL AUTO_INCREMENT , 
+    `uid` INT NOT NULL COMMENT 'GLOBAL USER ID' , 
+    `fname` VARCHAR(30) NULL DEFAULT NULL COMMENT 'First Name' , 
+    `lname` VARCHAR(30) NULL DEFAULT NULL COMMENT 'Last Name' , 
+    `uemail` VARCHAR(30) NULL DEFAULT NULL COMMENT 'Umass Email' , 
+    `pemail` VARCHAR(30) NULL DEFAULT NULL COMMENT 'Personal Email' , 
+    `tel` VARCHAR(12) NULL DEFAULT NULL COMMENT 'Phone Number' , 
+    `yog` YEAR NULL DEFAULT NULL COMMENT 'Year of Graduation' , 
+    `eyear` YEAR NULL DEFAULT NULL COMMENT 'Enrollment Year' , 
+    `college` VARCHAR(30) NULL DEFAULT NULL COMMENT 'College (School)' , 
+    `major` VARCHAR(30) NULL DEFAULT NULL COMMENT 'Major' , 
+    `minor` VARCHAR(30) NULL DEFAULT NULL COMMENT 'Minor' , 
+    `cert` VARCHAR(30) NULL DEFAULT NULL COMMENT 'Certificate' , 
+    `type` ENUM('member','client','bot') NULL DEFAULT NULL COMMENT 'User Type' , 
+    `create_date` DATETIME NULL DEFAULT NULL COMMENT 'User Creation Date' , 
+    `onboard_date` DATETIME NULL DEFAULT NULL COMMENT 'Date onboard completed' , 
+    PRIMARY KEY (`id`)
+) ENGINE = MyISAM;

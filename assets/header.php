@@ -5,8 +5,18 @@
 # Contains the bootstrap refs #
 ###############################
 
+require("dbfunctions.php");
 
+//Check user auth and store user info
 
+$GLOBAL_UID = "30649719"; //Hardcoded for now
+
+//Redirect user if they go to a page they shouldn't be on
+global $PAGE_KEY;
+global $PAGE_TARGET;
+
+if($PAGE_KEY != "")
+    show_page($PAGE_KEY, $PAGE_TARGET);
 
 
 ?>
@@ -27,8 +37,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700">
-    <link rel="stylesheet" href="assets/css/navbar.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/styles.css">
 
     <!-- Data Tables Loading -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -47,6 +57,8 @@
 
 
 
+
+
 <?php
 #################
 # GLOBAL NAVBAR #
@@ -56,7 +68,7 @@
 <body>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <div class="navbar-header"><a class="navbar-brand navbar-link" href="#">Minute Code Dev Portal</a>
+            <div class="navbar-header"><a class="navbar-brand navbar-link" href="http://minutecode.org/dev_home.php">Minute Code Dev Portal</a>
                 <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-2"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
             </div>
             <div class="collapse navbar-collapse" id="navcol-2">
@@ -72,12 +84,12 @@
                         <ul class="dropdown-menu" role="menu">
                             <li role="presentation"><a href="#">My Team</a></li>
                             <li role="presentation"><a href="#">Board </a></li>
-                            <li role="presentation"><a href="#">Manage Team</a></li>
+                            <li role="presentation" <?php show("admin:manage_team", true);?>" ><a href="http://minutecode.org/admin/manage_team.php">Manage Team</a></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Admin </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li role="presentation"><a href="#">Privilege Keys</a></li>
+                            <li role="presentation" class="<?php show("admin:privilege_keys", true);?>" ><a href="http://minutecode.org/admin/privilege_keys.php">Privilege Keys</a></li>
                             <li role="presentation"><a href="#">Project Managment</a></li>
                         </ul>
                     </li>

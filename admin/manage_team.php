@@ -10,7 +10,7 @@
     ##########################
 
     $ASSETS_FOLDER = "../assets/";
-    $PAGE_KEY = "admin:privilege_keys";
+    $PAGE_KEY = "admin:manage_team";
     $PAGE_TARGET = True;
 
     require($ASSETS_FOLDER."header.php");
@@ -23,7 +23,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h1 class="text-center">Privilege Keys [WIP]</h1></div>
+            <h1 class="text-center">User Managment [WIP]</h1></div>
     </div>
 
     <div class="row">
@@ -31,7 +31,19 @@
             <div class="table-responsive">
                 <?php
                 
-                db_table_to_html_table("privilege_keys");
+                db_table_to_html_table("users");
+
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <?php
+                
+                db_table_to_html_table("user_info", "id, uid AS 'User ID', fname AS 'First Name', lname as 'Last Name', uemail as 'UMASS Email', type as 'Type'");
 
                 ?>
             </div>
