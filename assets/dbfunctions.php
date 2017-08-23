@@ -126,6 +126,52 @@ function db_table_to_html_table($table_name, $select = "*"){
     echo "</table>";
 }
 
+function db_select_to_html_table($id, $sql){
+    
+        echo "<<script>
+        
+            $(document).ready(function() {
+                $('#$id').DataTable();
+            } );
+        
+        </script>";
+    
+        //table declaration
+        echo "<table id=".$id." class=\"display\" cellspacing=\"0\" width=\"100%\">";
+        
+        //Table Body
+        $query = query_db($sql);
+        $keys = array_keys(next_result($query));
+    
+        //Table Head
+        echo "<thead> <tr>";
+        
+        foreach ($keys as &$field){
+            echo "<td>".$field."</td>";
+        }
+    
+        echo "</thead> </tr>";
+    
+        unset($query, $field);
+    
+        $query = query_db($sql);
+    
+        echo "<tbody>";
+        while($result = next_result($query)){
+            echo "<tr>";
+    
+            foreach ($keys as &$field){
+                echo "<td>".$result[$field]."</td>";
+            }
+    
+            echo "</tr>";
+        }
+        echo "</tbody>";
+    
+    
+        echo "</table>";
+    }
+
 function format_key($cat, $key){
     return $cat.":".$key;
 }
