@@ -42,6 +42,27 @@
         </div>
     </div>
 
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <div class="row">
+        <?php
+
+        ###########################
+        # Generated Add User Form #
+        ###########################
+
+        start_form('post', '#', 'add_user', 'form-horizontal', "Add New User");
+            add_input('text', 'Username: ', 'username', '', False);
+            add_submit();
+        end_form();
+
+
+        ?>
+    </div>
+
 </div>
 
 <?php 

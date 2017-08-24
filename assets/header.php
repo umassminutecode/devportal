@@ -6,12 +6,14 @@
 ###############################
 
 require("dbfunctions.php");
+require("bs_form.php");
 
 //Check user auth and store user info
 
 $GLOBAL_UID = "30649719"; //Hardcoded for now
 
 //Redirect user if they go to a page they shouldn't be on
+global $ASSETS_FOLDER;
 global $PAGE_KEY;
 global $PAGE_TARGET;
 
@@ -37,8 +39,9 @@ if($PAGE_KEY != "")
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700">
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="<?php echo $ASSETS_FOLDER; ?>css/navbar.css">
+    <link rel="stylesheet" href="<?php echo $ASSETS_FOLDER; ?>css/styles.css">
+    <link rel="stylesheet" href="<?php echo $ASSETS_FOLDER; ?>css/form-gen.css">
 
     <!-- Data Tables Loading -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
