@@ -13,24 +13,26 @@ function next_result($result){
 }
 
 function has_privilege($uid, $cat, $key, $target){
+
     $check = check_key($uid, $cat, $key, $target);
- 
-    //echo $check;
+    
+    //echo $check==0? "<h1> True </h1>" : "<h1> False </h1>";
+
     if($check == 0) return false;
 
     //FIXME: Make the last used actually update
-
+    $time = date("Y-m-d H:i:s"); 
     $query = "UPDATE user_privileges
-    SET last_used = 'CURRENT_TIMESTAMP'
+    SET last_used = `$time
     WHERE id = $check";
 
-    //$query = query_db($query);
+    $query = query_db($query);
 
     return True;
 }
 
 function check_key($uid, $cat, $key, $target){
-
+    
     $query = "SELECT user_privileges.uid, privilege_keys.cat, privilege_keys.key_char, user_privileges.key_value, privilege_keys.key_type, user_privileges.id
               FROM user_privileges
               INNER JOIN privilege_keys ON user_privileges.key_id = privilege_keys.id

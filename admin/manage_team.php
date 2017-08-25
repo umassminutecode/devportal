@@ -56,6 +56,7 @@
 
         start_form('post', '#', 'add_user', 'form-horizontal', "Add New User");
             add_input('text', 'Username: ', 'username', '', False);
+            add_input('text', 'Email', 'email', True);
             add_submit();
         end_form();
 

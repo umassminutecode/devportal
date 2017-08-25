@@ -16,13 +16,12 @@
     require($ASSETS_FOLDER."header.php");
 
 
+    $check = check_key("30649719", "admin", "privilege_keys", True);
+    echo "<h1>".$check."heyhey</h1>";
+
 
 ?>
 
-
-
-
-SPECIFIC PAGE CODE GOES HERE
 
 
 
