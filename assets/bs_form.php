@@ -1,8 +1,9 @@
 <?php
 
 //TODO: Add fieldset, textarea, progress and other bits and bobs
+//FIXME: make this a class so that I can not have to 
 
-function start_form($method, $action, $id, $style, $heading, $attr_ar = array()){
+function start_form($method, $id, $style, $heading, $progress = -1, $attr_ar = array()){
     //Column Sizing
     echo "<div class=\"
     
@@ -13,9 +14,19 @@ function start_form($method, $action, $id, $style, $heading, $attr_ar = array())
     
     \">";
 
+    //pass_js($id);
+
     echo "<h2 class=\"text-center form-heading\">$heading</h2>";
 
-    $str = "<form method=\"$method\" action=\"$action\" id=\"$id\" class=\"$style custom-gen-form\" ";
+    if($progress > -1){
+        echo "
+        <div class=\"progress\">
+            <div class=\"progress-bar\" aria-valuenow=\"$progress\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: $progress%;\">$progress%</div>
+        </div>
+        ";
+    }
+
+    $str = "<form method=\"$method\" action=\"function-$id\" id=\"$id\" class=\"$style custom-gen-form\" ";
         $str .= $attr_ar ? addAttributes( $attr_ar ) . '>' : '>';
     
     echo $str;
@@ -42,9 +53,43 @@ function add_input($type, $label, $name, $value, $feedback = False, $attr_ar = a
 
 }
 
-function add_submit($label = "Submit"){
-    echo "<button class=\"btn btn-default btn-block submit-button\" type=\"submit\">$label</button>";
+function add_text($text){
+    echo " <p class=\"form-text\">$text</p>";
 }
+
+function add_submit($id = "", $label = "Submit"){
+    echo "<button class=\"btn btn-default btn-block submit-button\" type=\"submit\">$label</button>";
+
+    //TODO: Pass variables around properly
+    //echo "<div id=\"alert-$id\" class=\"alert-box alert alert-success\" role=\"alert\"> <strong>Submitted!</strong> </div>";
+}
+
+// function pass_js($id){
+//     echo "
+    
+//     <script>
+//         function function-$id(){
+//             if (window.XMLHttpRequest) {
+//                 // code for IE7+, Firefox, Chrome, Opera, Safari
+//                 xmlhttp = new XMLHttpRequest();
+//             } else {
+//                 // code for IE6, IE5
+//                 xmlhttp = new ActiveXObject(\"Microsoft.XMLHTTP\");
+//             }
+//             xmlhttp.onreadystatechange = function() {
+//                 if (this.readyState == 4 && this.status == 200) {
+//                     document.getElementById(\"alert-$id\").innerHTML = this.responseText;
+//                 }
+//             };
+//             xmlhttp.open(\"GET\",\"getuser.php?q=\"+str,true);
+//             xmlhttp.send();
+//         }
+//         }
+//     </script>
+    
+    
+//     ";
+// }
 
 function end_form(){
     echo "</form>";

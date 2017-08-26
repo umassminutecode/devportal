@@ -59,5 +59,18 @@ div.radio {
   border:0;
   margin:30px auto 0;
   outline:none;
+} 
+
+.gen-form .custom-gen-form .alert-box {
+  margin: 25px;
+}
+
+.gen-form .custom-gen-form .form-text {
+  margin: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 40px;
+  text-align: center;
+  color: #003399;
+  font-size: 1.7rem;
 }
 

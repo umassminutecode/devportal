@@ -23,7 +23,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h1 class="text-center">User Managment [WIP]</h1></div>
+            <h1 class="text-center page-heading">User Managment [WIP]</h1></div>
     </div>
 
     <div class="row">
@@ -47,6 +47,10 @@
     <br/>
     <br/>
 
+    <scrpit>
+
+    </script>
+
     <div class="row">
         <?php
 
@@ -54,7 +58,7 @@
         # Generated Add User Form #
         ###########################
 
-        start_form('post', '#', 'add_user', 'form-horizontal', "Add New User");
+        start_form('post', 'add_user', 'form-horizontal', "Add New User");
             add_input('text', 'Username: ', 'username', '', False);
             add_input('text', 'Email', 'email', True);
             add_submit();

@@ -69,7 +69,7 @@ if($PAGE_KEY != "")
 # GLOBAL NAVBAR #
 #################
 
-if(!$HIDE_HEADER)
+if($HIDE_HEADER == False)
     require("global_header.php");
 
 #################
