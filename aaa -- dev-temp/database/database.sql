@@ -58,5 +58,8 @@ CREATE TABLE `minuteco_devportal`.`user_info` (
     `create_date` DATETIME NULL DEFAULT NULL COMMENT 'User Creation Date' , 
     `onboard_date` DATETIME NULL DEFAULT NULL COMMENT 'Date onboard completed' , 
     `rank` VARCHAR(30) NULL DEFAULT 'Member' ,
+    `onboard_stage` INT NOT NULL DEFAULT '0' ,
+    `email_code` VARCHAR(12) NULL DEFAULT NULL ,
+    `langs` MEDIUMTEXT NULL DEFAULT NULL ,
     PRIMARY KEY (`id`)
 ) ENGINE = MyISAM;

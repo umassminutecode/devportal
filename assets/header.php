@@ -5,6 +5,9 @@
 # Contains the bootstrap refs #
 ###############################
 
+session_start();
+ob_start();
+
 require("dbfunctions.php");
 require("bs_form.php");
 

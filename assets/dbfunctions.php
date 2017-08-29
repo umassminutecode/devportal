@@ -4,12 +4,26 @@ require("connection.php"); //Creats $conn with db connection
 $dev = False;
 
 function query_db($query){
+    //echo $query;
     global $conn;
-	return mysqli_query($conn, $query);
+    if($query == "") return Null;
+    return mysqli_query($conn, $query);
 }
 
 function next_result($result){
     return mysqli_fetch_assoc($result);
+}
+
+
+function query_error(){
+    global $conn;
+    return mysqli_error($conn);
+}
+
+function num_rows($sql){
+    $result = query_db($sql);
+    if($result == False) return False;
+    return mysqli_num_rows($result);
 }
 
 function has_privilege($uid, $cat, $key, $target){
@@ -172,6 +186,72 @@ function get_user_info($uid, $field){
     $query = query_db($sql);
     $result = next_result($query);
     return $result["$field"];
+}
+
+function get_user_name($uid){
+    $sql = "SELECT CONCAT(fname, ' ', lname) AS Name
+            FROM user_info
+            WHERE user_info.uid = $uid";
+
+    $query = query_db($sql);
+    $result = next_result($query);
+    return $result["Name"];
+}
+
+function get_user_username($uid){
+    $sql = "SELECT username
+            FROM users
+            WHERE users.uid = $uid";
+
+    $query = query_db($sql);
+    $result = next_result($query);
+    return $result["username"];
+}
+
+function update_table($tbl, $set, $where){
+    $sql = "UPDATE $tbl
+            SET $set
+            WHERE $where";
+
+    $query = query_db($sql);
+}
+
+function update_field($tbl, $field, $value, $where, $equals){
+    $sql = "UPDATE $tbl
+    SET `$field`=\"$value\"
+    WHERE `$where`=\"$equals\" ";
+
+    $query = query_db($sql);
+}
+
+function update_timestamp_field($tbl, $field, $where, $equals){
+    $sql = "UPDATE $tbl
+    SET `$field`= now()
+    WHERE `$where`=\"$equals\" ";
+
+    $query = query_db($sql);
+}
+
+function insert_into_table($tbl, $columns, $values = array()){
+    $colstr = "(";
+    foreach($columns as $col){
+        if($col != $columns[0]) $colstr .= ",";
+        $colstr .= "`".$col."`";
+    }
+    $colstr .= ")";
+
+    $valstr = "(";
+    foreach($values as $val){
+        if($val != $values[0]) $valstr .= ",";
+        $valstr .= "\"".$val."\"";
+    }
+    $valstr .= ")";
+    
+    $sql = "INSERT INTO $tbl $colstr
+            VALUES $valstr";
+
+    $query = query_db($sql);
+    return $sql;
 }
 
 

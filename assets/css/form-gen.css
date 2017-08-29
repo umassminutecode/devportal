@@ -53,12 +53,14 @@ div.radio {
   border-radius:2px;
   background:#6caee0;
   color:#ffffff;
-  font-weight:bold;
   box-shadow:1px 2px 4px 0 rgba(0, 0, 0, 0.08);
   padding:14px 22px;
   border:0;
   margin:30px auto 0;
   outline:none;
+  font-weight: normal;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
 } 
 
 .gen-form .custom-gen-form .alert-box {
