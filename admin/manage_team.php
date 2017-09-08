@@ -33,6 +33,8 @@
         insert_into_table("users", array("uid", "username"), array($_POST["uid"], $_POST["username"]));
         insert_into_table("user_info", array("uid", "uemail"), array($_POST["uid"], $_POST["email"]));
         
+        //FIXME:update create date
+
         $add_user->form_kickback("alert-success", "User <b>".$_POST["username"]."</b> with uid <b>".$_POST["uid"]."</b> added. <i>Sending onboard email to ".$_POST["email"]."</i>");
         
     }

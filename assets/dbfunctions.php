@@ -188,6 +188,16 @@ function get_user_info($uid, $field){
     return $result["$field"];
 }
 
+function get_user_field($uid, $field){
+    $sql = "SELECT $field
+    FROM users
+    WHERE users.uid = $uid";
+
+    $query = query_db($sql);
+    $result = next_result($query);
+    return $result["$field"];
+}
+
 function get_user_name($uid){
     $sql = "SELECT CONCAT(fname, ' ', lname) AS Name
             FROM user_info
@@ -206,6 +216,19 @@ function get_user_username($uid){
     $query = query_db($sql);
     $result = next_result($query);
     return $result["username"];
+}
+
+function get_user_uid_from_username($username){
+    $sql = "SELECT uid
+    FROM users
+    WHERE users.username = $username";
+
+    $query = query_db($sql);
+
+    if($query == NULL) return -1;
+
+    $result = next_result($query);
+    return $result["uid"];
 }
 
 function update_table($tbl, $set, $where){
@@ -259,7 +282,4 @@ function insert_into_table($tbl, $columns, $values = array()){
     $MODE_EQUALS = 0;
     $MODE_LESS = 1;
     $MODE_GREATER = 2;
-
-
-
 ?>

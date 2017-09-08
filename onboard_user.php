@@ -119,7 +119,7 @@
 
         $onboard_2->start_form("post", "form-horizontal", "Academic Info", 25);
             $onboard_2->add_input("month", "Enrollment: ", "eyear", "", False);
-            $onboard_2->add_input("month", "Graducation: ", "yog", "", False);
+            $onboard_2->add_input("month", "Graduation: ", "yog", "", False);
             $onboard_2->add_input("text", "College: ", "college", "", False);
             $onboard_2->add_input("text", "Major: ", "major", "", False);
             $onboard_2->add_input("text", "Minor: ", "minor", "", False);
@@ -171,6 +171,8 @@
             
 
             update_field("user_info", "onboard_stage", "5", "uid", $ONBOARD_UID);
+
+            //FIXME: update onboard date
 
             $onboard_4->form_kickback("", "");
         }

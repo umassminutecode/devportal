@@ -9,6 +9,10 @@ CREATE TABLE `minuteco_devportal`.`users` (
     `creation_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , 
     `password` VARCHAR(128) NOT NULL , 
     `password_last_change` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+    `password_attempts` INT NULL DEFAULT '0' ,
+    `locked` BOOLEAN NOT NULL DEFAULT FALSE ,
+    `deleted` BOOLEAN NOT NULL DEFAULT FALSE ,
+    `login_msg` TEXT NULL DEFAULT NULL ,
     PRIMARY KEY (`id`)
 ) ENGINE = MyISAM;
 
@@ -61,5 +65,17 @@ CREATE TABLE `minuteco_devportal`.`user_info` (
     `onboard_stage` INT NOT NULL DEFAULT '0' ,
     `email_code` VARCHAR(12) NULL DEFAULT NULL ,
     `langs` MEDIUMTEXT NULL DEFAULT NULL ,
+    PRIMARY KEY (`id`)
+) ENGINE = MyISAM;
+
+## AUTH_KEYS TABLE
+
+CREATE TABLE `minuteco_devportal`.`auth_keys` (
+    `id` INT NOT NULL AUTO_INCREMENT , 
+    `uid` INT NULL DEFAULT NULL , 
+    `auth_key` VARCHAR(100) NULL DEFAULT NULL , 
+    `key_creation` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+    `key_expiration` TIMESTAMP NULL DEFAULT NULL , 
+    `ip` VARCHAR(15) NULL DEFAULT NULL , 
     PRIMARY KEY (`id`)
 ) ENGINE = MyISAM;
