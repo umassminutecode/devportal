@@ -1,15 +1,12 @@
 <?php
-
-
+session_start();
 require("dbfunctions.php");
 require("bs_form.php");
 
-//Are we proccesing a login, check to see if username and pswd are set
+$login = new bs_form("login", "minutecode.org");
 
-if(isset($_POST["login_user"])){
-
-    $login = new bs_form("login", "minutecode.org");
-
+if($login->process_form()){
+    
     $login->check_input("username");
     $login->check_input("password");
 
@@ -18,8 +15,8 @@ if(isset($_POST["login_user"])){
 
     $uid = get_user_uid_from_username($username);
 
-    if($uid = -1){
-        $login->form_kickback("alert-danger", "Invalid Credentails. ");
+    if($uid == -1){
+        $login->form_kickback("alert-danger", "Invalid Credentails." . $uid);
     }
 
     //Begin checking info about the user attempting to login
@@ -53,7 +50,7 @@ if(isset($_POST["login_user"])){
         //Store info in server
         insert_into_table("auth_keys", array("uid", "auth_key", "key_creation", "key_expiration", "ip"), array($uid, $key, $key_creation, $key_expiration, $ip));
         //Redirect to devhome
-        header("Location: http://dev_home.php");
+        header("Location: http://minutecode.org/dev_home.php");
         exit();
 
     }else{

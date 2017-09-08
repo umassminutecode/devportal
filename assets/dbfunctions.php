@@ -11,6 +11,7 @@ function query_db($query){
 }
 
 function next_result($result){
+    if ($result == False) return False;
     return mysqli_fetch_assoc($result);
 }
 
@@ -221,11 +222,11 @@ function get_user_username($uid){
 function get_user_uid_from_username($username){
     $sql = "SELECT uid
     FROM users
-    WHERE users.username = $username";
+    WHERE users.username = \"$username\"";
 
     $query = query_db($sql);
 
-    if($query == NULL) return -1;
+    //if($query == NULL) return -1;
 
     $result = next_result($query);
     return $result["uid"];
