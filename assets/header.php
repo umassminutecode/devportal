@@ -8,12 +8,19 @@
 session_start();
 ob_start();
 
-require("dbfunctions.php");
-require("bs_form.php");
+global $IGNORE_AUTH;
+
+if($IGNORE_AUTH){
+    require("dbfunctions.php");
+    require("bs_form.php");
+}else{
+    require("auth.php");
+}
+
 
 //Check user auth and store user info
 
-$GLOBAL_UID = "30649719"; //Hardcoded for now
+$GLOBAL_UID = $_SESSION['SESS_UID'];
 
 //Redirect user if they go to a page they shouldn't be on
 global $ASSETS_FOLDER;

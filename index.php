@@ -4,6 +4,7 @@
     $PAGE_KEY = "";
     $PAGE_TARGET = "";
     $HIDE_HEADER = True;
+    $IGNORE_AUTH = True;
 
     require($ASSETS_FOLDER."header.php");
 

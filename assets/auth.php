@@ -39,16 +39,17 @@ if($login->process_form()){
         //Collect data and generate key
         //$uid
         $key = md5(rand(0, PHP_INT_MAX));
-        $key_creation = time();
-        $key_expiration = $key_creation + (15 * 60); //15 Minutes
         $ip = $_SERVER['REMOTE_ADDR'];
 
         //Store info in session
         $_SESSION['SESS_UID'] = $uid;
         $_SESSION['SESS_KEY'] = $key;
 
+        $endTime = strtotime("+15 minutes");
+        $expiration = date('Y-m-d H:i:s', $endTime);
+
         //Store info in server
-        insert_into_table("auth_keys", array("uid", "auth_key", "key_creation", "key_expiration", "ip"), array($uid, $key, $key_creation, $key_expiration, $ip));
+        insert_into_table("auth_keys", array("uid", "auth_key", "key_creation", "key_expiration", "ip"), array($uid, $key, date('Y-m-d H:i:s'), $expiration, $ip));
         //Redirect to devhome
         header("Location: http://minutecode.org/dev_home.php");
         exit();
@@ -68,6 +69,40 @@ if($login->process_form()){
 
 
 //check to see if key already exist and is valid
+
+if(isset($_SESSION['SESS_UID']) == False || isset($_SESSION['SESS_KEY']) == False){
+    header("Location: http://minutecode.org");
+}
+
+//check if they have a valid key
+
+    $uid = $_SESSION['SESS_UID'];
+    $key = $_SESSION['SESS_KEY'];
+
+$sql = "SELECT key_expiration
+        FROM auth_keys 
+        WHERE uid=\"$uid\" AND auth_key=\"$key\"
+        ";
+$query = query_db($sql);
+if($query == False){
+    //Key not in db send to login
+    unset($_SESSION['SESS_UID'], $_SESSION['SESS_KEY']);
+    $login->form_kickback("alert-danger", "Invalid Auth Key.");
+    exit();
+}
+$result = next_result($query);
+
+if(strtotime($result["key_expiration"]) >= strtotime("+1 seconds")){
+    //Success -- give user 15 more minutes
+    update_timestamp_field("users", "key_expiration", "uid = \"$uid\" AND auth_key", $key);
+}else{
+    //Key invalid
+    unset($_SESSION['SESS_UID'], $_SESSION['SESS_KEY']);
+    $login->form_kickback("alert-warning", "Login expired. Please re-login.");
+    exit();
+}
+
+
 
 
 ?>

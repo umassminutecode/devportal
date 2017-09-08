@@ -31,7 +31,7 @@
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#"><?php echo get_user_info($GLOBAL_UID, "rank").", ".get_user_info($GLOBAL_UID, "fname")." ".get_user_info($GLOBAL_UID, "lname"); ?></a>
                         <ul class="dropdown-menu" role="menu">
                             <li role="presentation"><a href="#">My Profile</a></li>
-                            <li role="presentation"><a href="#">Logout </a></li>
+                            <li role="presentation"><a href="assets/logout.php">Logout </a></li>
                         </ul>
                     </li>
                 </ul>
