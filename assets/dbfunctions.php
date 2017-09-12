@@ -27,8 +27,10 @@ function num_rows($sql){
     return mysqli_num_rows($result);
 }
 
-function has_privilege($uid, $cat, $key, $target){
+function has_privilege($cat, $key, $target){
 
+    global $GLOBAL_UID;
+    $uid = $GLOBAL_UID;
     $check = check_key($uid, $cat, $key, $target);
     
     //echo $check==0? "<h1> True </h1>" : "<h1> False </h1>";
@@ -99,14 +101,8 @@ function db_table_to_html_table($table_name, $select = "*"){
 
 function db_select_to_html_table($id, $sql){
     
-        echo "<<script>
-        
-            $(document).ready(function() {
-                $('#$id').DataTable();
-            } );
-        
-        </script>";
-    
+        ready_datatable($id);
+
         //table declaration
         echo "<table id=".$id." class=\"display\" cellspacing=\"0\" width=\"100%\">";
         
@@ -143,6 +139,16 @@ function db_select_to_html_table($id, $sql){
         echo "</table>";
     }
 
+    function ready_datatable($id){
+        echo "<<script>
+        
+            $(document).ready(function() {
+                $('#$id').DataTable();
+            } );
+        
+        </script>";
+    }
+
 function format_key($cat, $key){
     return $cat.":".$key;
 }
@@ -152,11 +158,9 @@ function break_line(){
 
 function show($key, $target){
 
-    global $GLOBAL_UID;
-
     $key_split = explode(":", $key);
 
-    if(!has_privilege($GLOBAL_UID, $key_split[0], $key_split[1], $target)){
+    if(!has_privilege($key_split[0], $key_split[1], $target)){
         echo "hidden";
         return;
     }
@@ -166,11 +170,10 @@ function show($key, $target){
 }
 
 function show_page($key, $target){
-    global $GLOBAL_UID;
     
         $key_split = explode(":", $key);
     
-        if(!has_privilege($GLOBAL_UID, $key_split[0], $key_split[1], $target)){
+        if(!has_privilege($key_split[0], $key_split[1], $target)){
             header( 'Location: http://minutecode.org/dev_home.php' ) ;
             return;
         }

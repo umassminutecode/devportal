@@ -31,7 +31,7 @@
         $add_user->check_if_field_exist_in_table("users", "username");
 
         insert_into_table("users", array("uid", "username"), array($_POST["uid"], $_POST["username"]));
-        insert_into_table("user_info", array("uid", "uemail"), array($_POST["uid"], $_POST["email"]));
+        insert_into_table("user_info", array("uid", "uemail", "type"), array($_POST["uid"], $_POST["email"], $_POST["type"]));
         
         //FIXME:update create date
 
@@ -57,7 +57,52 @@
                 FROM users
                 INNER JOIN user_info ON users.uid = user_info.uid";
 
-                db_select_to_html_table("users", $sql);
+                
+                
+                //table declaration
+                echo "<table id=\"users\" class=\"display\" cellspacing=\"0\" width=\"100%\">";
+                
+                //Table Body
+                $query = query_db($sql);
+                $keys = array_keys(next_result($query));
+            
+                //Table Head
+                echo "<thead> <tr>";
+
+                foreach ($keys as &$field){
+                    echo "<td>".$field."</td>";
+                }
+                
+                echo "<td><img src=\"http://minutecode.org/assets/img/icon/glyphicons-517-menu-hamburger.png\" ></img></td>";
+            
+                echo "</thead> </tr>";
+            
+                unset($query, $field);
+            
+                $query = query_db($sql);
+            
+                echo "<tbody>";
+                while($result = next_result($query)){
+                    echo "<tr>";
+            
+                    foreach ($keys as &$field){
+                        echo "<td>".$result[$field]."</td>";
+                    }
+
+                    //User control links here
+                    $row_uid = $result["users.uid"];
+                    echo "<td>";
+                    echo "<a href=\"edit_user.php?uid=$row_uid\" ><img src=\"http://minutecode.org/assets/img/icon/glyphicons-517-menu-hamburger.png  \" ></img></a>";
+                    echo "</td>";
+            
+                    echo "</tr>";
+                }
+                echo "</tbody>";
+            
+            
+                echo "</table>";
+
+                ready_datatable("users");
 
                 ?>
             </div>
@@ -80,13 +125,15 @@
         # Generated Add User Form #
         ###########################
 
-        $add_user->start_form("post", "form-horizontal", "Add New User");
-            $add_user->add_input("number", "UID: ", "uid", "", False);
-            $add_user->add_input("text", "Username: ", "username", "", False);
-            $add_user->add_input("text", "Email", "email", "", False);
-        $add_user->end_form();
-
-
+        if(has_privilege("admin", "add_user", True)){
+            $add_user->start_form("post", "form-horizontal", "Add New User");
+                $add_user->add_select("Type:", "type", "", False, False, array("Member", "Client", "Bot"));
+                $add_user->add_input("number", "UID: ", "uid", "", False);
+                $add_user->add_input("text", "Username: ", "username", "", False);
+                $add_user->add_input("text", "Email:", "email", "", False, True);
+            $add_user->end_form();
+        }
+       
         ?>
     </div>
 
@@ -97,3 +144,8 @@
 require($ASSETS_FOLDER."footer.php");
 
 ?>
+<script>
+    $('#username').keyup(function () {
+        $('#email').val($(this).val()+"@umass.edu");
+    });
+</script>

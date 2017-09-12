@@ -44,9 +44,15 @@ class bs_form{
         $this->add_alert_feedback($this->id);
     }
 
-    function add_input($type, $label, $name, $value, $feedback = False, $readonly = False, $attr_ar = array()){
+    function add_select($label, $name, $value, $feedback = False, $readonly = False, $options = array(), $attr_ar = array()){
 
-        $str = "<div class=\"form-group has-feedback\">";
+        if($feedback == True)
+            $feedback = "has-feedback";
+        else
+            unset($feedback);
+
+
+        $str = "<div class=\"form-group $feedback \">";
             $str .= "<div class=\"col-lg-4 col-md-3 col-sm-4\">";
                 $str .= "<label for=\"$name\" class=\"control-label\">$label</label>";
             $str .= "</div>";
@@ -58,7 +64,41 @@ class bs_form{
                 else
                     unset($readonly);
 
-                $str .= "<input type=\"$type\" name=\"$name\" class=\"form-control\" value=\"$value\" $readonly />";
+                $str .= "<select name=\"$name\" id=\"$name\" class=\"form-control\" value=\"$value\" $readonly >";
+                foreach($options as $option){
+                    $str .= "<option value=\"$option\">$option</option>";
+                }
+                $str .= "</select>";
+                $str .= $feedback ? "<i aria-hidden=\"true\" class=\"form-control-feedback glyphicon glyphicon-star\"></i>" : "";
+
+            $str .= "</div>";
+        
+        $str .= "</div>";
+
+        echo $str;
+
+    }
+
+    function add_input($type, $label, $name, $value, $feedback = False, $readonly = False, $attr_ar = array()){
+        
+        if($feedback == True)
+            $feedback = "has-feedback";
+        else
+            unset($feedback);
+
+        $str = "<div class=\"form-group $feedback\">";
+            $str .= "<div class=\"col-lg-4 col-md-3 col-sm-4\">";
+                $str .= "<label for=\"$name\" class=\"control-label\">$label</label>";
+            $str .= "</div>";
+
+            $str .= "<div class=\"col-lg-8 col-md-9 col-sm-8\">";
+
+                if($readonly == True)
+                    $readonly = "readonly";
+                else
+                    unset($readonly);
+
+                $str .= "<input type=\"$type\" name=\"$name\" id=\"$name\" class=\"form-control\" value=\"$value\" $readonly />";
                 //$str .= $attr_ar " . ? addAttributes( $attr_ar ) . '/>' : '/>';
                 $str .= $feedback ? "<i aria-hidden=\"true\" class=\"form-control-feedback glyphicon glyphicon-star\"></i>" : "";
 

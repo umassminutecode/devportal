@@ -82,6 +82,9 @@ if($PAGE_KEY != "")
 if($HIDE_HEADER == False)
     require("global_header.php");
 
+echo $_SESSION["dev-msg"];
+unset($_SESSION["dev-msg"]);
+
 #################
 # GLOBAL NAVBAR #
 #################
