@@ -10,7 +10,7 @@
     ##########################
 
     $ASSETS_FOLDER = "../assets/";
-    $PAGE_KEY = "admin:manage_team";
+    $PAGE_KEY = "admin:view_manage_team";
     $PAGE_TARGET = True;
 
     require($ASSETS_FOLDER."header.php");
@@ -22,6 +22,10 @@
 
     $add_user = new bs_form("add_user", "minutecode.org/admin/manage_team.php");
     if($add_user->process_form()){
+
+        if(has_privilege("admin", "create_user", False)){
+            $add_user->form_kickback("alert-danger", "You do not have the rights to do this.");
+        }
         
         $add_user->check_input("uid");
         $add_user->check_input("username");
@@ -53,14 +57,14 @@
             <div class="table-responsive">
                 <?php
 
-                $sql = "SELECT users.uid AS 'User ID', users.username AS 'Username', CONCAT(user_info.fname, ' ', user_info.lname) AS 'Name', user_info.type as 'Type', user_info.uemail as 'UMASS Email'
+                $sql = "SELECT users.uid AS 'User ID', users.username AS 'Username', CONCAT(user_info.fname, ' ', user_info.lname) AS 'Name', user_info.rank AS Rank, user_info.type as 'Type', user_info.uemail as 'UMASS Email'
                 FROM users
                 INNER JOIN user_info ON users.uid = user_info.uid";
 
                 
                 
                 //table declaration
-                echo "<table id=\"users\" class=\"display\" cellspacing=\"0\" width=\"100%\">";
+                echo "<table id=\"users\" class=\"display\" cellspacing=\"0\" width=\"100%\" style=\"text-align:center;\">";
                 
                 //Table Body
                 $query = query_db($sql);
@@ -73,7 +77,9 @@
                     echo "<td>".$field."</td>";
                 }
                 
-                echo "<td><img src=\"http://minutecode.org/assets/img/icon/glyphicons-517-menu-hamburger.png\" ></img></td>";
+                echo "<td>Edit</td>";
+                echo "<td>Lock</td>";
+                echo "<td>Access</td>";
             
                 echo "</thead> </tr>";
             
@@ -90,9 +96,25 @@
                     }
 
                     //User control links here
-                    $row_uid = $result["users.uid"];
+                    $row_uid = $result["User ID"];
+
+                    //Hamburger
                     echo "<td>";
                     echo "<a href=\"edit_user.php?uid=$row_uid\" ><img src=\"http://minutecode.org/assets/img/icon/glyphicons-517-menu-hamburger.png  \" ></img></a>";
+                    echo "</td>";
+                    
+                    //Lock
+                    echo "<td>";
+                    if(get_user_field($row_uid, "locked") == True){
+                        echo "<a href=\"edit_user.php?uid=$row_uid\" ><img src=\"http://minutecode.org/assets/img/icon/glyphicons-204-lock.png \" alt=\"Unlock user account, will regrant their access.\"></img></a>";
+                    }else{
+                        echo "<a href=\"edit_user.php?uid=$row_uid\" ><img src=\"http://minutecode.org/assets/img/icon/glyphicons-205-unlock.png \" alt=\"Lock user account, will disable their access.\"></img></a>";
+                    }
+                    echo "</td>";
+
+                    //Access
+                    echo "<td>";
+                    echo "<a href=\"edit_user.php?uid=$row_uid\" ><img src=\"http://minutecode.org/assets/img/icon/glyphicons-45-keys.png \" alt=\"Configure user access. \" ></img></a>";
                     echo "</td>";
             
                     echo "</tr>";
@@ -125,7 +147,7 @@
         # Generated Add User Form #
         ###########################
 
-        if(has_privilege("admin", "add_user", True)){
+        if(has_privilege("admin", "create_user", True)){
             $add_user->start_form("post", "form-horizontal", "Add New User");
                 $add_user->add_select("Type:", "type", "", False, False, array("Member", "Client", "Bot"));
                 $add_user->add_input("number", "UID: ", "uid", "", False);

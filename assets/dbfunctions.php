@@ -104,7 +104,7 @@ function db_select_to_html_table($id, $sql){
         ready_datatable($id);
 
         //table declaration
-        echo "<table id=".$id." class=\"display\" cellspacing=\"0\" width=\"100%\">";
+        echo "<table id=".$id." class=\"display\" cellspacing=\"0\" width=\"100%\" style=\"text-align:center;\">";
         
         //Table Body
         $query = query_db($sql);
