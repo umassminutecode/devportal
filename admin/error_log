@@ -1,0 +1,7 @@
+[10-Sep-2017 21:58:44 UTC] PHP Parse error:  syntax error, unexpected '$str' (T_VARIABLE) in /home/minutecode/public_html/assets/bs_form.php on line 66
+[12-Sep-2017 16:15:36 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO), expecting ',' or ';' in /home/minutecode/public_html/admin/manage_team.php on line 94
+[13-Sep-2017 18:19:06 UTC] PHP Fatal error:  Call to a member function start_form() on null in /home/minutecode/public_html/admin/privilege_keys.php on line 49
+[13-Sep-2017 18:24:10 UTC] PHP Fatal error:  Call to a member function start_form() on null in /home/minutecode/public_html/admin/privilege_keys.php on line 49
+[13-Sep-2017 22:19:37 UTC] PHP Warning:  array_keys() expects parameter 1 to be array, boolean given in /home/minutecode/public_html/assets/dbfunctions.php on line 111
+[13-Sep-2017 22:19:37 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/minutecode/public_html/assets/dbfunctions.php on line 116
+[13-Sep-2017 22:24:49 UTC] PHP Fatal error:  Call to a member function start_form() on null in /home/minutecode/public_html/admin/privilege_keys.php on line 88

@@ -28,6 +28,8 @@ if($login->process_form()){
         $login->form_kickback("alert-success", "This account has been deleted. Please contact the board for more information.");
     }
 
+    //FIXME: Check onboard stage and redirect if needed
+
 
 
     //Check their password

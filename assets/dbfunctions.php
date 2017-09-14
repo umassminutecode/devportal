@@ -99,9 +99,9 @@ function db_table_to_html_table($table_name, $select = "*"){
     db_select_to_html_table($table_name, $sql);
 }
 
-function db_select_to_html_table($id, $sql){
+function db_select_to_html_table($id, $sql, $datatable = ""){
     
-        ready_datatable($id);
+        ready_datatable($id, $datatable);
 
         //table declaration
         echo "<table id=".$id." class=\"display\" cellspacing=\"0\" width=\"100%\" style=\"text-align:center;\">";
@@ -139,11 +139,13 @@ function db_select_to_html_table($id, $sql){
         echo "</table>";
     }
 
-    function ready_datatable($id){
+    function ready_datatable($id, $datatable){
         echo "<<script>
         
             $(document).ready(function() {
-                $('#$id').DataTable();
+                $('#$id').DataTable({
+                    $datatable
+                });
             } );
         
         </script>";
@@ -259,7 +261,7 @@ function update_timestamp_field($tbl, $field, $where, $equals){
     $query = query_db($sql);
 }
 
-function insert_into_table($tbl, $columns, $values = array()){
+function insert_into_table($tbl, $columns = array(), $values = array()){
     $colstr = "(";
     foreach($columns as $col){
         if($col != $columns[0]) $colstr .= ",";
@@ -269,7 +271,11 @@ function insert_into_table($tbl, $columns, $values = array()){
 
     $valstr = "(";
     foreach($values as $val){
-        if($val != $values[0]) $valstr .= ",";
+        if($val != $values[0]){
+            $valstr .= ",";
+        }else{
+            $values[0] = Null;
+        }
         $valstr .= "\"".$val."\"";
     }
     $valstr .= ")";
@@ -278,7 +284,15 @@ function insert_into_table($tbl, $columns, $values = array()){
             VALUES $valstr";
 
     $query = query_db($sql);
+    
     return $sql;
+}
+
+function delete_table_row($tbl, $where, $equals){
+    $sql = "DELETE FROM $tbl
+    WHERE `$where`=\"$equals\" ";
+
+    $query = query_db($sql);
 }
 
 

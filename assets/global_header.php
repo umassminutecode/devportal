@@ -16,14 +16,15 @@
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">The Team</a>
                         <ul class="dropdown-menu" role="menu">
                             <li role="presentation"><a href="#">My Team</a></li>
-                            <li role="presentation"><a href="#">Board </a></li>
-                            <li role="presentation" <?php show("admin:manage_team", true);?>" ><a href="http://minutecode.org/admin/manage_team.php">Manage Team</a></li>
+                            <li role="presentation"><a href="#">Executive Board </a></li>
+                            <li role="presentation" <?php show("admin:view_manage_team", true);?>" ><a href="http://minutecode.org/admin/manage_team.php">Manage Team</a></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Admin </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li role="presentation" class="<?php show("admin:privilege_keys", true);?>" ><a href="http://minutecode.org/admin/privilege_keys.php">Privilege Keys</a></li>
+                            <li role="presentation" class="<?php show("admin:view_privilege_keys", true);?>" ><a href="http://minutecode.org/admin/privilege_keys.php">Privilege Keys</a></li>
                             <li role="presentation"><a href="#">Project Managment</a></li>
+                            <li role="presentation" <?php show("admin:view_manage_team", true);?>" ><a href="http://minutecode.org/admin/manage_team.php">Manage Team</a></li>
                         </ul>
                     </li>
                 </ul>

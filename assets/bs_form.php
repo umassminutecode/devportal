@@ -15,13 +15,11 @@ class bs_form{
         $this->submit = "Submit";
     }
 
-    function start_form($method, $style, $heading, $progress = -1, $attr_ar = array()){
+    function start_form($method, $style, $heading, $progress = -1, $class_ovr = "col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4"){
         //Column Sizing
         echo "<div class=\"
         
-        col-xs-10 col-xs-offset-1
-        col-sm-6 col-sm-offset-3
-        col-lg-4 col-lg-offset-4
+        $class_ovr
         gen-form
         
         \">";
