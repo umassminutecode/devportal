@@ -88,7 +88,7 @@
 
             if(has_privilege("admin", "create_privilege_key", True)){
                 $add_key->start_form("post", "form-horizontal", "Create Privilege Key", -1, "col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-lg-6 col-lg-offset-3");
-                    $add_key->add_select("Key Type:", "key_type", "TF", False, False, array("TF", "UID", "GID", "PID"));
+                    $add_key->add_select("Key Type:", "key_type", "TF", False, False, array("TF", "UID", "TID", "PID"));
                     $add_key->add_input("text", "Category:", "cat", "", "", False);
                     $add_key->add_input("text", "Key Char:", "key_char", "", "", False);
                     $add_key->add_input("text", "Refrence:", "usage_ref", "", False );

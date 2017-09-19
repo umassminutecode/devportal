@@ -53,6 +53,9 @@ if($login->process_form()){
         //Store info in server
         insert_into_table("auth_keys", array("uid", "auth_key", "key_creation", "key_expiration", "ip"), array($uid, $key, date('Y-m-d H:i:s'), $expiration, $ip));
         //Redirect to devhome
+        if(isset($_SESSION["REQUEST_URL"])){
+            header("Location: ".$_SESSION["REQUEST_URL"]);
+        }
         header("Location: http://minutecode.org/dev_home.php");
         exit();
 
@@ -94,6 +97,9 @@ if($query == False){
 }
 $result = next_result($query);
 
+
+//FIXME: Not Working
+//We are updating key expiration to be now which thankfully is not working  
 if(strtotime($result["key_expiration"]) >= strtotime("+1 seconds")){
     //Success -- give user 15 more minutes
     update_timestamp_field("users", "key_expiration", "uid = \"$uid\" AND auth_key", $key);

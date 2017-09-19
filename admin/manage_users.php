@@ -10,7 +10,7 @@
     ##########################
 
     $ASSETS_FOLDER = "../assets/";
-    $PAGE_KEY = "admin:view_manage_team";
+    $PAGE_KEY = "admin:view_manage_users";
     $PAGE_TARGET = True;
 
     require($ASSETS_FOLDER."header.php");
@@ -20,7 +20,7 @@
     # ADD USER RECEIVE #
     ####################
 
-    $add_user = new bs_form("add_user", "minutecode.org/admin/manage_team.php");
+    $add_user = new bs_form("add_user", "minutecode.org/admin/manage_users.php");
     if($add_user->process_form()){
 
         if(has_privilege("admin", "create_user", False)){
@@ -55,7 +55,7 @@
             <div class="table-responsive">
                 <?php
 
-                $sql = "SELECT users.uid AS 'User ID', users.username AS 'Username', CONCAT(user_info.fname, ' ', user_info.lname) AS 'Name', user_info.rank AS Rank, user_info.type as 'Type', user_info.uemail as 'UMASS Email'
+                $sql = "SELECT users.uid AS 'User ID', users.username AS 'Username', CONCAT(user_info.fname, ' ', user_info.lname) AS 'Name', user_info.rank AS Rank, user_info.type as 'Type', user_info.uemail as 'Email'
                 FROM users
                 INNER JOIN user_info ON users.uid = user_info.uid";
 
@@ -147,7 +147,7 @@
 
         if(has_privilege("admin", "create_user", True)){
             $add_user->start_form("post", "form-horizontal", "Add New User");
-                $add_user->add_select("Type:", "type", "", False, False, array("Member", "Client", "Bot"));
+                $add_user->add_select("Type:", "type", "", False, False, array("Member", "Bot"));
                 $add_user->add_input("number", "UID: ", "uid", "", False);
                 $add_user->add_input("text", "Username: ", "username", "", False);
                 $add_user->add_input("text", "Email:", "email", "", False, True);

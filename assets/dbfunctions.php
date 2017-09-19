@@ -128,7 +128,11 @@ function db_select_to_html_table($id, $sql, $datatable = ""){
             echo "<tr>";
     
             foreach ($keys as &$field){
-                echo "<td>".$result[$field]."</td>";
+                if($field == "Active"){
+                    echo "<td>".($result[$field] ? 'True' : 'False')."</td>";
+                }else{
+                    echo "<td>".$result[$field]."</td>";
+                }
             }
     
             echo "</tr>";
@@ -139,7 +143,7 @@ function db_select_to_html_table($id, $sql, $datatable = ""){
         echo "</table>";
     }
 
-    function ready_datatable($id, $datatable){
+    function ready_datatable($id, $datatable = ""){
         echo "<<script>
         
             $(document).ready(function() {

@@ -17,10 +17,13 @@ if($IGNORE_AUTH){
     require("auth.php");
 }
 
+require("bs_box.php");
+
 
 //Check user auth and store user info
 
 $GLOBAL_UID = $_SESSION['SESS_UID'];
+$_SESSION["REQUEST_URL"] = "http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
 
 //Redirect user if they go to a page they shouldn't be on
 global $ASSETS_FOLDER;
@@ -54,6 +57,7 @@ if($PAGE_KEY != "")
     <link rel="stylesheet" href="<?php echo $ASSETS_FOLDER; ?>css/styles.css">
     <link rel="stylesheet" href="<?php echo $ASSETS_FOLDER; ?>css/form-gen.css">
     <link rel="stylesheet" href="<?php echo $ASSETS_FOLDER; ?>css/devportal.css">
+    <link rel="stylesheet" href="<?php echo $ASSETS_FOLDER; ?>css/bs_box.css">
 
     <!-- Data Tables Loading -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
