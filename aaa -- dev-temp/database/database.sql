@@ -118,3 +118,12 @@ CREATE TABLE `minuteco_devportal`.`clients` (
     `state` ENUM('Contacted ','Prospective','Scheduled','In Progress','Published w/ Support','Published wo/ Support','Canceled ','Re-Applying ','Declined') NOT NULL DEFAULT 'Contacted' ,
     PRIMARY KEY (`cid`)
 ) ENGINE = MyISAM;
+
+## TEAM ASSIGNMENTS TABLE
+CREATE TABLE `minuteco_devportal`.`team_assignments` ( 
+    `id` INT NOT NULL AUTO_INCREMENT , 
+    `uid` INT NOT NULL , 
+    `tid` INT NOT NULL , 
+    `src` VARCHAR(30) NULL DEFAULT NULL , 
+    PRIMARY KEY (`id`)
+) ENGINE = MyISAM;

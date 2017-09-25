@@ -35,4 +35,6 @@ class bs_tabs{
         echo "</div>";
     }
     
+}
+
 ?>

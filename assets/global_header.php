@@ -21,19 +21,12 @@
                         </ul>
                     </li>
                     <!-- Assignment -->
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">The Team</a>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Assignment</a>
                         <ul class="dropdown-menu" role="menu">
-                            <li role="presentation" class="<?php show("assign:user_to_team", true);?>" ><a href="http://minutecode.org/admin/team_assignment.php">Privilege Keys</a></li>
+                            <li role="presentation" class="<?php show("assign:user_to_team", true);?>" ><a href="http://minutecode.org/assignment/team_assignment.php">Users to Teams</a></li>
                         </ul>
                     </li>
                     <!-- Admin -->
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">The Team</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li role="presentation"><a href="#">My Team</a></li>
-                            <li role="presentation"><a href="#">Executive Board </a></li>
-                        </ul>
-                    </li>
-                    <!-- User -->
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Admin </a>
                         <ul class="dropdown-menu" role="menu">
                             <li role="presentation" class="<?php show("admin:view_privilege_keys", true);?>" ><a href="http://minutecode.org/admin/privilege_keys.php">Privilege Keys</a></li>
@@ -45,6 +38,7 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+                    <!-- User -->
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#"><?php echo get_user_info($GLOBAL_UID, "rank").", ".get_user_info($GLOBAL_UID, "fname")." ".get_user_info($GLOBAL_UID, "lname"); ?></a>
                         <ul class="dropdown-menu" role="menu">
                             <li role="presentation"><a href="#">My Profile</a></li>

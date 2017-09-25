@@ -18,6 +18,7 @@ if($IGNORE_AUTH){
 }
 
 require("bs_box.php");
+require("bs_tabs.php");
 
 
 //Check user auth and store user info
