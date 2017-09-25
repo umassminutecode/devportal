@@ -99,10 +99,21 @@ $result = next_result($query);
 
 
 //FIXME: Not Working
-//We are updating key expiration to be now which thankfully is not working  
-if(strtotime($result["key_expiration"]) >= strtotime("+1 seconds")){
+
+$endTime = strtotime("+2 seconds");
+$expiration = date('Y-m-d H:i:s', $endTime);
+
+echo strtotime($result["key_expiration"]);
+echo time();
+
+if(strtotime($result["key_expiration"]) >= $expiration){
     //Success -- give user 15 more minutes
-    update_timestamp_field("users", "key_expiration", "uid = \"$uid\" AND auth_key", $key);
+
+    $endTime = strtotime("+15 minutes");
+    $expiration = date('Y-m-d H:i:s', $endTime);
+
+    update_field("users", "key_expiration", $expiration, "uid = \"$uid\" AND auth_key", $key);
+
 }else{
     //Key invalid
     unset($_SESSION['SESS_UID'], $_SESSION['SESS_KEY']);

@@ -10,24 +10,13 @@
     ##########################
 
     $ASSETS_FOLDER = "../assets/";
-    $PAGE_KEY = "";
-    $PAGE_TARGET = "";
+    $PAGE_KEY = "assign:user_to_team";
+    $PAGE_TARGET = True;
 
     require($ASSETS_FOLDER."header.php");
 
+    
 
-
-?>
-
-
-
-
-SPECIFIC PAGE CODE GOES HERE
-
-
-
-
-<?php 
 
     require($ASSETS_FOLDER."footer.php");
 

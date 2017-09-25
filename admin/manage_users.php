@@ -98,23 +98,23 @@
 
                     //Hamburger
                     echo "<td>";
-                    echo "<a href=\"edit_user.php?uid=$row_uid\" ><img src=\"http://minutecode.org/assets/img/icon/glyphicons-517-menu-hamburger.png  \" ></img></a>";
+                    display_icon("menu-hamburger", "black", "edit_user.php?uid=$row_uid");
                     echo "</td>";
                     
                     //Lock
                     echo "<td>";
                     if(get_user_field($row_uid, "locked") == True){
-                        echo "<a href=\"edit_user.php?uid=$row_uid\" ><img src=\"http://minutecode.org/assets/img/icon/glyphicons-204-lock.png \" alt=\"Unlock user account, will regrant their access.\"></img></a>";
+                        display_icon("lock", "red", "edit_user.php?uid=$row_uid");
                     }else{
-                        echo "<a href=\"edit_user.php?uid=$row_uid\" ><img src=\"http://minutecode.org/assets/img/icon/glyphicons-205-unlock.png \" alt=\"Lock user account, will disable their access.\"></img></a>";
+                        display_icon("lock", "black", "edit_user.php?uid=$row_uid");
                     }
                     echo "</td>";
 
                     //Access
                     echo "<td>";
-                    echo "<a href=\"edit_user.php?uid=$row_uid\" ><img src=\"http://minutecode.org/assets/img/icon/glyphicons-45-keys.png \" alt=\"Configure user access. \" ></img></a>";
+                    display_icon("log-in", "black", "edit_user.php?uid=$row_uid");
                     echo "</td>";
-            
+                    
                     echo "</tr>";
                 }
                 echo "</tbody>";
@@ -147,7 +147,7 @@
 
         if(has_privilege("admin", "create_user", True)){
             $add_user->start_form("post", "form-horizontal", "Add New User");
-                $add_user->add_select("Type:", "type", "", False, False, array("Member", "Bot"));
+                $add_user->add_select("Type:", "type", "", False, False, array("Member", "Client", "Bot"));
                 $add_user->add_input("number", "UID: ", "uid", "", False);
                 $add_user->add_input("text", "Username: ", "username", "", False);
                 $add_user->add_input("text", "Email:", "email", "", False, True);
@@ -166,6 +166,20 @@ require($ASSETS_FOLDER."footer.php");
 ?>
 <script>
     $('#username').keyup(function () {
-        $('#email').val($(this).val()+"@umass.edu");
+        //TODO: based on member type
+        if($('#type').val() == "Member"){
+            $('#email').val($(this).val()+"@umass.edu");
+        } 
+    });
+
+    $('#type').change(function () {
+        //TODO: based on member type
+        if($('#type').val() == "Member"){
+            $('#email').attr('readonly', 'readonly'); 
+        }else{
+            $('#email').val('');
+            $('#email').removeAttr('readonly');
+        }
+        
     });
 </script>

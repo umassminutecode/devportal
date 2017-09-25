@@ -53,7 +53,7 @@
         $project_test->box_display_line("Primary Contact: ".$result["Primary Contact"]);
     
         $project_test->box_display_lineheader("Dev Team");
-        $project_test->box_display_line("Proect Lead: ".$result["Project Lead"]);
+        $project_test->box_display_line("Project Lead: ".$result["Project Lead"]);
         $project_test->box_display_line("Team: ".$result["Team"]);
         $project_test->box_end();
     }

@@ -299,6 +299,11 @@ function delete_table_row($tbl, $where, $equals){
     $query = query_db($sql);
 }
 
+function display_icon($icon, $color = "black", $link = "#"){
+    echo "<a href=\"$link\"><span class=\"glyphicon glyphicon-".$icon."\" style=\"color:$color\"></span></a>";
+    
+}
+
 
 ####### has_privilege MODES
     $MODE_EQUALS = 0;

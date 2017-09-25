@@ -58,7 +58,7 @@ CREATE TABLE `minuteco_devportal`.`user_info` (
     `major` VARCHAR(30) NULL DEFAULT NULL COMMENT 'Major' , 
     `minor` VARCHAR(30) NULL DEFAULT NULL COMMENT 'Minor' , 
     `cert` VARCHAR(30) NULL DEFAULT NULL COMMENT 'Certificate' , 
-    `type` ENUM('Member','Bot') NULL DEFAULT NULL COMMENT 'User Type' , 
+    `type` ENUM('Member','Client','Bot') NULL DEFAULT NULL COMMENT 'User Type' , 
     `langs` MEDIUMTEXT NULL DEFAULT NULL ,
     `create_date` DATETIME NULL DEFAULT NULL COMMENT 'User Creation Date' , 
     `onboard_date` DATETIME NULL DEFAULT NULL COMMENT 'Date onboard completed' , 
